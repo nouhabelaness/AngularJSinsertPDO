@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AngularJS</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"> </script>
+    </head>
+
+    <body ng-app="insertApp" ng-controller=" insertCtrl">
+        <h1>MYSQL Insert with PHP in AngularJS</h1>
+        <form name="userForm" ng-submit=" submitForm()">
+           <p>Enter CompanyName :<input type="text" required ng-model="user.CompanyName"></p>
+           <p>Enter City :<input type="text" required ng-model="user.City"></p>
+           <p>Enter Country :<input type="text" required ng-model="user.Country"></p>
+           <button type="submit">Insert</button><br>
+        </form>
+    </body>
+    <script>
+        var app = angular.module("insertApp", []);
+        app.controller("insertCtrl", function($scope, $http) {
+            $scope.user = {};
+            $scope.submitForm = function() {
+               $http({ method  : 'POST',
+               url :'insert_dataPDO.php',
+               data : $scope.user,
+               headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+               })
+            };
+        });
+    </script>
+</html>
